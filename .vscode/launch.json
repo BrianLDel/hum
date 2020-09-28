@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringtennisApplication<springtennis>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.baufest.tennis.springtennis.SpringtennisApplication",
+            "projectName": "springtennis",
+            "args": ""
+        }
+    ]
+}
