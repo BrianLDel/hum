@@ -1,6 +1,7 @@
 package com.baufest.tennis.springtennis.service;
 
 import com.baufest.tennis.springtennis.dto.JugadorDTO;
+import com.baufest.tennis.springtennis.dto.JugadorGananciaDTO;
 import com.baufest.tennis.springtennis.enums.Estado;
 import com.baufest.tennis.springtennis.mapper.JugadorMapper;
 import com.baufest.tennis.springtennis.model.Jugador;
@@ -112,6 +113,52 @@ public class JugadorServiceImpl implements JugadorService {
         } else{
             throw new NoSuchElementException(PLAYER_WITH_ID + id + DOES_NOT_EXIST);
         }
+    }
+
+    public List<JugadorGananciaDTO> gananciaTotalJugadores(){
+        List<Jugador> jugadores = jugadorRepository.findAll();
+        List<Partido> partidos = partidoRepository.findAll();
+
+        List<JugadorGananciaDTO> jugadoresYGanancias = new ArrayList<>();
+
+        if (jugadores != null){
+            for(int i = 0; i < jugadores.size(); i++){
+
+                //Se juntan todos los partidos ganados en 2 listas
+                List<Partido> partidosGanadosLocal = this.listPartidosGanadosLocalDeJugador(jugadores.get(i).getId(), partidos);
+                List<Partido> partidosGanadosVisitante = this.listPartidosGanadosVisitanteDeJugador(jugadores.get(i).getId(), partidos);
+
+                //se filtra los partidos que ganó de local, y que el visitante haya tenido 3 o menos games
+                List<Partido> ganadosConDiferenciaMayorLocal = partidosGanadosLocal
+                    .stream().filter( partido -> partido.getCantidadGamesVisitante() <= 3).collect(Collectors.toList());
+
+                //se filtra los partidos que ganó de local, y que el visitante haya tenido 4 o mas games
+                List<Partido> ganadosConDiferenciaMenorLocal = partidosGanadosLocal
+                    .stream().filter( partido -> partido.getCantidadGamesVisitante() > 3).collect(Collectors.toList());
+
+                //se filtra los partidos que ganó de visitante, y que el visitante haya tenido 3 o menos games
+                List<Partido> ganadosConDiferenciaMayorVisante = partidosGanadosVisitante
+                    .stream().filter(partido -> partido.getCantidadGamesVisitante() <= 3).collect(Collectors.toList());
+
+                //se filtra los partidos que ganó de visitante, y que el visitante haya tenido 4 o mas games
+                List<Partido> ganadosConDiferenciaMenorVisante = partidosGanadosVisitante
+                    .stream().filter(partido -> partido.getCantidadGamesVisitante() > 3).collect(Collectors.toList());
+
+                int gananciaMayor = (ganadosConDiferenciaMayorLocal.size() + ganadosConDiferenciaMayorVisante.size()) * 300;
+                int ganaciaMenor = (ganadosConDiferenciaMenorLocal.size() + ganadosConDiferenciaMenorVisante.size()) * 200;
+
+                int ganaciaTotal = gananciaMayor + ganaciaMenor;
+
+                JugadorGananciaDTO jugadorConGanancias = new JugadorGananciaDTO();
+                jugadorConGanancias.setIdJugador(jugadores.get(i).getId());
+                jugadorConGanancias.setNombre(jugadores.get(i).getNombre());
+                jugadorConGanancias.setGanancia(ganaciaTotal);
+
+                jugadoresYGanancias.add(jugadorConGanancias);
+
+            }
+        }
+        return jugadoresYGanancias;
     }
 
     private List<Partido> listPartidosGanadosLocalDeJugador(Long id, List<Partido> partidos) {

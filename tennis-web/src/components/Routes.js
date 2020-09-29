@@ -4,6 +4,7 @@ import Jugador from '../containers/Jugador/Jugador';
 import Cancha from '../containers/Cancha/Cancha';
 import Partido from '../containers/Partido/Partido';
 import PartidoTablero from '../components/PartidoTablero/PartidoTablero'
+import Entrenador from '../containers/Entrenador/Entrenador'
 
 export default function Routes() {
   
@@ -13,6 +14,7 @@ export default function Routes() {
       <Route path="/canchas" component={Cancha} exact />
       <Route path="/partidos" component={Partido} exact/>
       <Route path="/partidos/jugar-partido" component={PartidoTablero} exact/>
+      <Route path="/entrenadores" component={Entrenador} exact/>
     </Switch>
   )
 }

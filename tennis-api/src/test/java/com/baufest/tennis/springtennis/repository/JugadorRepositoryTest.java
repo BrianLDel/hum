@@ -1,5 +1,6 @@
 package com.baufest.tennis.springtennis.repository;
 
+import com.baufest.tennis.springtennis.model.Entrenador;
 import com.baufest.tennis.springtennis.model.Jugador;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 public class JugadorRepositoryTest {
 
-    private static final Jugador JUGADOR1 = new Jugador("C", 2);
-    private static final Jugador JUGADOR2 = new Jugador("A", 1);
-    private static final Jugador JUGADOR3 = new Jugador("B", 3);
+    private static final Jugador JUGADOR1 = new Jugador("C", 2, new Entrenador("Artemis"));
+    private static final Jugador JUGADOR2 = new Jugador("A", 1, new Entrenador("Artemis"));
+    private static final Jugador JUGADOR3 = new Jugador("B", 3, new Entrenador("Artemis"));
 
     @Autowired
     private JugadorRepository repository;

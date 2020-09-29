@@ -2,7 +2,6 @@ package com.baufest.tennis.springtennis.dto;
 
 import org.json.JSONObject;
 
-import javax.persistence.*;
 
 public class JugadorDTO {
 
@@ -12,15 +11,19 @@ public class JugadorDTO {
 
 	private int puntos;
 
-	public JugadorDTO(String nombre, int puntos) {
+	private EntrenadorDTO entrenador;
+
+	public JugadorDTO(String nombre, int puntos, EntrenadorDTO entrenador) {
 		this.nombre = nombre;
 		this.puntos = puntos;
+		this.entrenador = entrenador;
 	}
 
-	public JugadorDTO(Long id, String nombre, int puntos) {
+	public JugadorDTO(Long id, String nombre, int puntos, EntrenadorDTO entrenador) {
 		this.id = id;
 		this.nombre = nombre;
 		this.puntos = puntos;
+		this.entrenador = entrenador;
 	}
 
 	public JugadorDTO(){}
@@ -49,11 +52,20 @@ public class JugadorDTO {
 		this.puntos = puntos;
 	}
 
+	public EntrenadorDTO getEntrenador() {
+		return entrenador;
+	}
+
+	public void setEntrenador(EntrenadorDTO entrenador) {
+		this.entrenador = entrenador;
+	}
+
 	public JSONObject toJSONObject() {
 		JSONObject jo = new JSONObject();
 		jo.put("id",getId());
 		jo.put("nombre",getNombre());
 		jo.put("puntos",getPuntos());
+		jo.put("entrenador",getEntrenador());
 		return jo;
 	}
 

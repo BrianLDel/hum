@@ -1,6 +1,7 @@
 package com.baufest.tennis.springtennis.controller;
 
 import com.baufest.tennis.springtennis.dto.JugadorDTO;
+import com.baufest.tennis.springtennis.dto.JugadorGananciaDTO;
 import com.baufest.tennis.springtennis.service.JugadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,12 @@ public class JugadorController {
         jugadorService.recalculateRanking(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/ganancias")
+    public ResponseEntity<List<JugadorGananciaDTO>> getById() {
+        return ResponseEntity.ok(jugadorService.gananciaTotalJugadores());
+    }
+
 }
 	
 

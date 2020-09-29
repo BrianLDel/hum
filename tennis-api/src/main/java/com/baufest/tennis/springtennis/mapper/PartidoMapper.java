@@ -6,7 +6,7 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = {CanchaMapper.class,JugadorMapper.class},componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(uses = {EntrenadorMapper.class,CanchaMapper.class,JugadorMapper.class},componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface PartidoMapper {
     PartidoMapper INSTANCE = Mappers.getMapper(PartidoMapper.class);
 

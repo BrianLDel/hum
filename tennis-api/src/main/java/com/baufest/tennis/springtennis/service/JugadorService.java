@@ -1,6 +1,7 @@
 package com.baufest.tennis.springtennis.service;
 
 import com.baufest.tennis.springtennis.dto.JugadorDTO;
+import com.baufest.tennis.springtennis.dto.JugadorGananciaDTO;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface JugadorService {
 	void delete(Long id);
 
 	JugadorDTO recalculateRanking(Long id);
+
+	List<JugadorGananciaDTO> gananciaTotalJugadores();
 }

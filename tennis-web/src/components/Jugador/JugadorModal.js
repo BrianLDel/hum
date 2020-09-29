@@ -1,11 +1,16 @@
 import React, { useRef } from 'react';
-import { Form, Button, Modal } from 'react-bootstrap'
-import FormRowInput from '../FormRow/FormRowInput'
+import { Form, Button, Modal } from 'react-bootstrap';
+import FormRowInput from '../FormRow/FormRowInput';
+import FormRowSelect from '../FormRow/FormRowSelect';
 
 const JugadorModal = (props) => {
 
   const formRef = useRef(null);
-  const {show, handleClose, handleChange, handleSubmit, isEdit, validate, errorMsg,jugador} = props;
+  const {show, handleClose, handleChange, handleSubmit, isEdit, validate, errorMsg, jugador, listaEntrenadores} = props;
+
+  const entrenadores = listaEntrenadores.map(entrenador => {
+    return <option key={entrenador.id} value={entrenador.id}>{entrenador.nombre}</option>
+  })
 
   return (
     <Modal
@@ -35,6 +40,15 @@ const JugadorModal = (props) => {
             value={jugador.puntos}
             handleChange={handleChange}
             property={"puntos"}
+          />
+
+          <FormRowSelect
+            label={"Entrenador"}
+            placeholder={"Elige un entrenador"}
+            value={jugador.entrenador.id}
+            handleChange={handleChange}
+            property={"entrenador"}
+            options={entrenadores}
           />
 
           {errorMsg !== '' &&

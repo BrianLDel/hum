@@ -1,7 +1,6 @@
 package com.baufest.tennis.springtennis.service;
 
 import com.baufest.tennis.springtennis.dto.CanchaDTO;
-import com.baufest.tennis.springtennis.model.Cancha;
 
 import java.util.List;
 

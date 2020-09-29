@@ -1,6 +1,7 @@
 package com.baufest.tennis.springtennis.service;
 
 import com.baufest.tennis.springtennis.dto.CanchaDTO;
+import com.baufest.tennis.springtennis.dto.EntrenadorDTO;
 import com.baufest.tennis.springtennis.dto.JugadorDTO;
 import com.baufest.tennis.springtennis.dto.PartidoDTO;
 import com.baufest.tennis.springtennis.enums.Estado;
@@ -10,6 +11,7 @@ import com.baufest.tennis.springtennis.mapper.JugadorMapper;
 import com.baufest.tennis.springtennis.mapper.PartidoMapper;
 import com.baufest.tennis.springtennis.mapper.PartidoMapperImpl;
 import com.baufest.tennis.springtennis.model.Cancha;
+import com.baufest.tennis.springtennis.model.Entrenador;
 import com.baufest.tennis.springtennis.model.Jugador;
 import com.baufest.tennis.springtennis.model.Partido;
 import com.baufest.tennis.springtennis.repository.PartidoRepository;
@@ -44,11 +46,11 @@ class PartidoServiceTest {
     List<Partido> partidosDePrueba = new ArrayList<>();
     List<PartidoDTO> partidosDTODePrueba = new ArrayList<>();
 
-    Jugador jugador1 = new Jugador(1L, "Federer", SCORE_30);
-    Jugador jugador2 = new Jugador(2L, "Nadal", SCORE_30);
+    Jugador jugador1 = new Jugador(1L, "Federer", SCORE_30, new Entrenador("Freya"));
+    Jugador jugador2 = new Jugador(2L, "Nadal", SCORE_30, new Entrenador("Freya"));
 
-    JugadorDTO jugadorDTO1 = new JugadorDTO(1L, "Federer", SCORE_30);
-    JugadorDTO jugadorDTO2 = new JugadorDTO(2L, "Nadal", SCORE_30);
+    JugadorDTO jugadorDTO1 = new JugadorDTO(1L, "Federer", SCORE_30, new EntrenadorDTO("Kali"));
+    JugadorDTO jugadorDTO2 = new JugadorDTO(2L, "Nadal", SCORE_30, new EntrenadorDTO("Kali"));
 
     Cancha cancha1 = new Cancha("Roland Garros", "Av Francia 123");
     CanchaDTO canchaDTO1 = new CanchaDTO("Roland Garros", "Av Francia 123");

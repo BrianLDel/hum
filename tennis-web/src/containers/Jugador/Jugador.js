@@ -10,7 +10,10 @@ const Jugador = props => {
 
   const initialJugadorData = { 
     nombre: '',
-    puntos: 0
+    puntos: 0,
+    entrenador:{
+      id: -1
+    }
   }
 
   const [newJugadorData,setNewJugadorData] = useState(initialJugadorData);
@@ -20,8 +23,15 @@ const Jugador = props => {
   const [validateForm, setValidateForm] = useState(false);
   const [errorMsg,setErrorMsg] = useState('');
 
+  const [listaEntrenadores, setListaEntrenadores] = useState([]);
+  const [listaGanancias, setListaGanancias] = useState([]);
+
+
   useEffect(() => {
     getJugadores();
+
+    getEntrenadores();
+    getGanancias();
   },[]);
 
   const getJugadores = async() => {
@@ -31,6 +41,27 @@ const Jugador = props => {
     }
     catch(error){
       console.log(error);
+    }
+  }
+
+  const getEntrenadores = async() => {
+    try{
+      let response = await API.get('/entrenadores');
+      setListaEntrenadores(response);
+    }
+    catch(error){
+      setErrorMsg(JSON.stringify(error));
+    }
+  }
+
+//Hago el request get para las ganancias
+const getGanancias = async() => {
+    try{
+      let response = await API.get('/jugadores/ganancias');
+      setListaGanancias(response);
+    }
+    catch(error){
+      setErrorMsg(JSON.stringify(error));
     }
   }
 
@@ -82,7 +113,19 @@ const Jugador = props => {
     if(value === '')
       setValidateForm(true);
 
-    setNewJugadorData({...newJugadorData, [tipo]:value});
+      let data = Object.assign({}, newJugadorData);
+
+      switch(tipo){
+        case 'nombre':
+          data.nombre = value;
+          break;
+        case 'entrenador':
+          data.entrenador.id = parseInt(value);
+          break;  
+        default:
+          break;
+      }
+    setNewJugadorData(data);
   }  
 
   const handleFormSubmit = (form, isEdit) => {
@@ -126,12 +169,14 @@ const Jugador = props => {
         validate={validateForm}
         errorMsg={errorMsg}
         jugador={newJugadorData}
+        listaEntrenadores={listaEntrenadores}
       />
       <JugadorList
         jugadores={jugadores}
         borrarJugador={borrarJugador}
         editarJugador={handleOpenModal}
         recalcularRanking={recalcularRanking}
+        ganancias={listaGanancias}
       />
     </div>
   );

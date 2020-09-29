@@ -19,4 +19,13 @@ If you want to learn more about creating good readme files then refer the follow
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
 
-Holaaa!!
+#2.2
+El calculo de ganancias está hecho. Pero tengo una problema final al crear un jugador. Pero está todo hecho.
+
+#Explicacion Del Punto 2.3 que no alcance a realizar
+Tendriamos en el back las respectivas CRUD para torneo.
+En el Front Tendriamos una vista con los torneos a realizarse.
+Tendriamos un modal para elegir los jugadores, fecha y cancha(será opcional)
+Reutilizaría el componente partido, el cual tomaría la fecha del torneo por defecto.
+En el back habría todo una logica para determinar los partidos entre los jugadores.
+

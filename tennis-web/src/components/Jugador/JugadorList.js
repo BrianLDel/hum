@@ -3,7 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 
 const JugadorList = props => {
 
-  const {jugadores, borrarJugador, editarJugador, recalcularRanking} = props;
+  const {jugadores, borrarJugador, editarJugador, recalcularRanking, ganancias} = props;
 
   const orderByName = (jugadores) => {
     return jugadores.sort((a, b) => a.nombre.localeCompare(b.nombre))
@@ -11,12 +11,17 @@ const JugadorList = props => {
 
   const listaJugadores = orderByName(jugadores).map((jugador) => {
 
-    const {id, nombre, puntos} = jugador;
+    const {id, nombre, puntos, entrenador} = jugador;
+
+    const gananciaJugador = ganancias.find(jugadorGanancia => jugadorGanancia.idJugador === id);
+
     return (
       <tr key={id}>
         <td>{id}</td>
         <td>{nombre}</td>
         <td>{puntos}</td>
+        <td>{entrenador.nombre}</td>
+        <td>{gananciaJugador.ganancia || null}</td>
         <td>
           <Button variant="primary" className="mr-2" onClick={()=>recalcularRanking(id)}> Recalcular ranking </Button>
           <Button variant="success" className="mr-2" onClick={()=>editarJugador(true,jugador)}> Editar </Button>
@@ -33,6 +38,8 @@ const JugadorList = props => {
           <th>ID</th>
           <th>Nombre</th>
           <th>Puntos</th>
+          <th>Entrenador</th>
+          <th>Ganancias</th>
           <th>Acciones</th>
         </tr>
       </thead>
