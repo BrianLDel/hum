@@ -24,21 +24,19 @@ const Jugador = props => {
   const [errorMsg,setErrorMsg] = useState('');
 
   const [listaEntrenadores, setListaEntrenadores] = useState([]);
-  const [listaGanancias, setListaGanancias] = useState([]);
 
 
   useEffect(() => {
     getJugadores();
 
     getEntrenadores();
-    getGanancias();
   },[]);
 
   const getJugadores = async() => {
     try{
       let response = await API.get('/jugadores');
-      setJugadores(response);
-    }
+      setJugadores(await calcularGanancias(response));//No basta con que la funcion sea definida async, tambien 
+    }                                                 //Tengo que hacer el await acá
     catch(error){
       console.log(error);
     }
@@ -55,15 +53,21 @@ const Jugador = props => {
   }
 
 //Hago el request get para las ganancias
-const getGanancias = async() => {
-    try{
-      let response = await API.get('/jugadores/ganancias');
-      setListaGanancias(response);
-    }
-    catch(error){
-      setErrorMsg(JSON.stringify(error));
-    }
-  }
+const calcularGanancias = async(jugadores) => {
+  let response = await API.get('/jugadores/ganancias');
+
+  const jugadoresConGanancias = jugadores.map(jugador => {
+    const jugadorGanancia = response.find(jg => jg.idJugador === jugador.id);
+    console.log(jugadorGanancia,"gananciaFound");
+
+    jugador.ganancia = jugadorGanancia.ganancia || 0;
+    return jugador;
+  })
+  console.log(jugadoresConGanancias,"ga")
+  return jugadoresConGanancias;
+
+}
+  
 
   const borrarJugador = async(id) => {
     if (window.confirm("Estas seguro?")) {
@@ -176,7 +180,6 @@ const getGanancias = async() => {
         borrarJugador={borrarJugador}
         editarJugador={handleOpenModal}
         recalcularRanking={recalcularRanking}
-        ganancias={listaGanancias}
       />
     </div>
   );

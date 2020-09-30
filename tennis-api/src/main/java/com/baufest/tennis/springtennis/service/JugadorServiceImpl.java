@@ -136,13 +136,13 @@ public class JugadorServiceImpl implements JugadorService {
                 List<Partido> ganadosConDiferenciaMenorLocal = partidosGanadosLocal
                     .stream().filter( partido -> partido.getCantidadGamesVisitante() > 3).collect(Collectors.toList());
 
-                //se filtra los partidos que ganó de visitante, y que el visitante haya tenido 3 o menos games
+                //se filtra los partidos que ganó de visitante, y que el local haya tenido 3 o menos games
                 List<Partido> ganadosConDiferenciaMayorVisante = partidosGanadosVisitante
-                    .stream().filter(partido -> partido.getCantidadGamesVisitante() <= 3).collect(Collectors.toList());
+                    .stream().filter(partido -> partido.getCantidadGamesLocal() <= 3).collect(Collectors.toList());
 
-                //se filtra los partidos que ganó de visitante, y que el visitante haya tenido 4 o mas games
+                //se filtra los partidos que ganó de visitante, y que el local haya tenido 4 o mas games
                 List<Partido> ganadosConDiferenciaMenorVisante = partidosGanadosVisitante
-                    .stream().filter(partido -> partido.getCantidadGamesVisitante() > 3).collect(Collectors.toList());
+                    .stream().filter(partido -> partido.getCantidadGamesLocal() > 3).collect(Collectors.toList());
 
                 int gananciaMayor = (ganadosConDiferenciaMayorLocal.size() + ganadosConDiferenciaMayorVisante.size()) * 300;
                 int ganaciaMenor = (ganadosConDiferenciaMenorLocal.size() + ganadosConDiferenciaMenorVisante.size()) * 200;

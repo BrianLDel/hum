@@ -58,7 +58,7 @@ public class JugadorController {
     }
 
     @GetMapping("/ganancias")
-    public ResponseEntity<List<JugadorGananciaDTO>> getById() {
+    public ResponseEntity<List<JugadorGananciaDTO>> getGanancias() {
         return ResponseEntity.ok(jugadorService.gananciaTotalJugadores());
     }
 
