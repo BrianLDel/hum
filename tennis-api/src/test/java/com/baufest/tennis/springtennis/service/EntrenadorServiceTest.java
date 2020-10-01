@@ -60,9 +60,8 @@ public class EntrenadorServiceTest {
 		entrenadoresDePrueba.get(2).setNombre("entrenador 3");
 		entrenadoresDePrueba.get(3).setNombre("entrenador 4");
 
-
 		entrenadorAAgregar.setId(5L);
-		entrenadorAAgregar.setNombre("cancha 5");
+		entrenadorAAgregar.setNombre("entrenador 5");
 	}
 
 

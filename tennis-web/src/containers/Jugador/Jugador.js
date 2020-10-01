@@ -123,6 +123,8 @@ const calcularGanancias = async(jugadores) => {
         case 'nombre':
           data.nombre = value;
           break;
+        case 'puntos':
+          data.puntos = parseInt(value)
         case 'entrenador':
           data.entrenador.id = parseInt(value);
           break;  
