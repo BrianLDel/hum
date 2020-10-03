@@ -16,6 +16,7 @@ function Menu()  {
                         <Nav.Link as={Link} to="/partidos">Partidos</Nav.Link>
                         <Nav.Link as={Link} to="/canchas">Canchas</Nav.Link>
                         <Nav.Link as={Link} to="/entrenadores">Entrenadores</Nav.Link>
+                        <Nav.Link as={Link} to="/torneos">Torneos</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </div>

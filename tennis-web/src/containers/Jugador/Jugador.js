@@ -58,14 +58,10 @@ const calcularGanancias = async(jugadores) => {
 
   const jugadoresConGanancias = jugadores.map(jugador => {
     const jugadorGanancia = response.find(jg => jg.idJugador === jugador.id);
-    console.log(jugadorGanancia,"gananciaFound");
-
     jugador.ganancia = jugadorGanancia.ganancia || 0;
     return jugador;
   })
-  console.log(jugadoresConGanancias,"ga")
   return jugadoresConGanancias;
-
 }
   
 
